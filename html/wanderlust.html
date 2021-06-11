@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>wanderlust</title>
+    <style>
+      #horizontal {
+background: url('http://static1.360vrs.com/pano-content/judith-stone-at-sunset-east-farndon/640px-360-panorama.jpg');
+width:auto;
+height: 400px;
+-webkit-animation: backgroundScroll 20s linear infinite;
+animation: backgroundScroll 20s linear infinite;
+}
+
+@-webkit-keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -400px 0;}
+}
+        
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -400px 0;}
+}
+      .input {
+      border: 2px solid white;
+      border-radius: 6px;
+      background-color: transparent;
+      width: 20%;
+      height: 45px;
+      color: lightcyan;
+      font-size: 130%;
+      padding-left: 20px;
+      margin-top: 270px;
+      margin-left: 30%;
+      }
+      .bttn {
+      border: 2px solid rgb(120, 118, 118);;
+      border-radius: 6px;
+      background-color:rgb(117, 198, 196);
+      width: 12%;
+      height: 45px;
+      color:white
+      
+
+      }
+      .ccentered {
+        margin-top:22%;
+        margin-left: 27%;
+      }
+      .weather {
+      box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      width:210px;
+      height:auto;
+      padding: 1%;
+      margin-left:  40%;
+      margin-top: 0,5%;
+      border-radius: 6px;
+      font-size: 20px;
+      line-height: 10px;
+      }
+      .desc{
+      margin-left: 10%;
+      font-size : 25px;
+      line-height : 5px;
+
+      }
+      .blue{
+      color: rgb(15, 205, 205);
+      font-size: 130%;
+      }
+
+      .question{
+        font-size:300%;
+        color: white;
+        position: relative;
+        top:65%;
+        left: 25%;
+      }
+      .logoName{
+        font-size:120%;
+        color: white;
+        position: fixed;
+        top:3%;
+        left: 90%;
+      }
+
+    </style>
+  </head>
+  <body>
+      <div id="horizontal">
+        <span class="logoName">Wanderlust &#9992;</span>
+        <span class="question">Where do you want to land?</span>
+        <div class="centered">
+          <input class="input" id="inp" type="text" >
+          <input class="bttn" type="submit" onclick="getTemp()"  style="font-size : 20px; " /> 
+        </div >
+      </div>
+          <div class="desc" id="description">
+          </div>
+          <div id="weatherInfo" class="desc" id="description">
+          </div>
+      </section>
+        <script src="../js/wonderlust.js"></script>
+  </body>
+</html>
