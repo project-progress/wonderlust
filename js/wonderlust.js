@@ -1,5 +1,6 @@
 let input = document.getElementById("inp")
 
+
 const getTemp = async ()=> {let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=d7085e16a4f596f2a4c2257f0348ae50`);
 const data = await  response.json()
 let temp = Math.floor(data.main.temp - 273);
@@ -86,7 +87,7 @@ box.appendChild(paragraph5)
 box.appendChild(paragraph6)
 box.setAttribute("class","weather")
 
-console.log(data.weather[0])
+
 }; 
 
 
@@ -95,6 +96,12 @@ console.log(data.weather[0])
 const getPlace = async ()=> {let response = await fetch(`https://api.foursquare.com/v2/venues/explore?near=${input.value}&client_id=TLP4ASNT2YWSZC1DZGH3PH2DLTJQGNJW1PDLLPEPTN3KPIUR&client_secret=QQMECI5FCKTKD0IEKUHPIDJX5AP4ZEBQ2AOLB5U5B1U5RKRH
 &v=20210611`);
 const data = await  response.json()
+
+let whiteStarEmoji =String.fromCodePoint(0x0002606)
+let blackStarEmoji =String.fromCodePoint(0x0002605)
+
+
+
 
 let name1 =data.response.groups[0].items[0].venue.name
 let address1 =data.response.groups[0].items[0].venue.location.address
@@ -119,6 +126,11 @@ document.getElementById("topPlace2").innerHTML = "";
 document.getElementById("topPlace3").innerHTML = "";
 document.getElementById("Top").innerHTML = "";
 
+document.getElementById("topPlace1").addEventListener("click", (e)=>bookmark({name:name1,address1,city1,country1}) )
+document.getElementById("topPlace2").addEventListener("click", (e)=>bookmark({name:name2,address2,city2,country2}) )
+document.getElementById("topPlace3").addEventListener("click", (e)=>bookmark({name:name3,address3,city3,country3}) )
+
+
 
 let Top=document.createElement("span")
 let TopInner =document.createTextNode("TOP  ATTRACTIONS")
@@ -129,8 +141,11 @@ TopAtractions.appendChild(Top)
 
 
 let firstPlace = document.createElement("h4")
-let firstPlaceInner =document.createTextNode(name1)
+let firstPlaceInner =document.createTextNode(`${name1} `)
 firstPlace.appendChild(firstPlaceInner)
+let firstStar =document.createElement("span")
+let firstStarInner =document.createTextNode(whiteStarEmoji)
+firstStar.appendChild(firstStarInner)
 let Address1 =document.createElement("p")
 let Address1Inner =document.createTextNode("Address:")
 Address1.appendChild(Address1Inner)
@@ -148,6 +163,9 @@ firstPlaceCountry.appendChild(firstPlaceCountryInner )
 let secondPlace = document.createElement("h4")
 let secondPlaceInner =document.createTextNode(name2)
 secondPlace.appendChild(secondPlaceInner)
+let secondStar =document.createElement("span")
+let secondStarInner =document.createTextNode(whiteStarEmoji)
+secondStar.appendChild(secondStarInner)
 let Address2 =document.createElement("p")
 let Address2Inner =document.createTextNode("Address:")
 Address2.appendChild(Address2Inner)
@@ -165,6 +183,9 @@ secondPlaceCountry.appendChild(secondPlaceCountryInner )
 let thirdPlace = document.createElement("h4")
 let thirdPlaceInner =document.createTextNode(name3)
 thirdPlace.appendChild(thirdPlaceInner)
+let thirdStar =document.createElement("span")
+let thirdStarInner =document.createTextNode(whiteStarEmoji)
+thirdStar.appendChild(thirdStarInner)
 let Address3 =document.createElement("p")
 let Address3Inner =document.createTextNode("Address:")
 Address3.appendChild(Address3Inner)
@@ -180,6 +201,8 @@ thirdPlaceCountry.appendChild(thirdPlaceCountryInner )
 
 
 let placeBox1 =document.getElementById("topPlace1")
+placeBox1.appendChild(firstStar)
+firstStar.setAttribute("id","span")
 placeBox1.appendChild(firstPlace)
 placeBox1.appendChild(Address1)
 placeBox1.appendChild(firstPlaceAddres)
@@ -188,6 +211,7 @@ placeBox1.appendChild(firstPlaceCountry)
 placeBox1.setAttribute("class","places")
 
 let placeBox2 =document.getElementById("topPlace2")
+placeBox2.appendChild(secondStar)
 placeBox2.appendChild(secondPlace)
 placeBox2.appendChild(Address2)
 placeBox2.appendChild(secondPlaceAddres)
@@ -197,6 +221,7 @@ placeBox2.setAttribute("class","places")
 
 
 let placeBox3 =document.getElementById("topPlace3")
+placeBox3.appendChild(thirdStar)
 placeBox3.appendChild(thirdPlace)
 placeBox3.appendChild(Address3)
 placeBox3.appendChild(thirdPlaceAddres)
@@ -204,4 +229,29 @@ placeBox3.appendChild(thirdPlaceCity)
 placeBox3.appendChild(thirdPlaceCountry)
 placeBox3.setAttribute("class","places")
 
+
+
 }; 
+
+
+function bookmark(data){ 
+
+
+        const myFavorite=localStorage.getItem("My favorite")
+
+        if (!myFavorite){
+                localStorage.setItem("My favorite",JSON.stringify([data]))
+                return}
+        const temp =JSON.parse(myFavorite)
+        const names = temp.map(e=>e.name)
+       
+        if ( names.includes(
+                data.name
+        ))return
+
+        localStorage.setItem("My favorite",JSON.stringify([...temp,data]))
+
+        
+}
+
+
